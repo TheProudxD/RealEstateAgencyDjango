@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import index, groups
+from .views import index, groups, about
 urlpatterns = [ 
     path('', index), 
-    path('groups/<slug:group>/', groups), ]
+    path('groups/<slug:group>/', groups),
+    path('about/', about),
+]
     
