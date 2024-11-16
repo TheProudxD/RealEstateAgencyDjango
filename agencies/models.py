@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 
 class Agent(models.Model):
     name = models.CharField(verbose_name="ФИО", max_length=100)
@@ -14,6 +14,9 @@ class Client(models.Model):
     type_dealer = models.CharField(verbose_name="Тип участника сделки", max_length=20)
     passport = models.CharField(verbose_name="Паспортные данные", max_length=50)
     credit = models.CharField(verbose_name="Контактные данные", max_length=100)
+
+    def get_absolute_url(self): 
+        return reverse('client', kwargs={'cl_id': self.pk})
 
 
 class TypeOfPayment(models.Model):

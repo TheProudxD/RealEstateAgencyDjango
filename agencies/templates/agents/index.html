@@ -1,0 +1,11 @@
+{% extends 'agents/base.html' %} {% block content %}
+<h1>{{ title }}</h1>
+{% for ag in agents %}
+<li>
+  <a href="{{ ag.get_absolute_url }}">
+    {{ ag.name }} {{ ag.credit | upper }}
+  </a>
+</li>
+{% endfor %}
+<p>Всего агентов: {{ agents | length }}</p>
+{% endblock %}

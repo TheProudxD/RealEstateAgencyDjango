@@ -3,20 +3,36 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Agent
 
-menu = ["О сайте", "Студенты", "Преподаватели", "Войти"]
+menu = [{'title': "О сайте", 'url_name': 'about'},
+{'title': "Клиенты", 'url_name': 'clients'},
+{'title': "Агенты", 'url_name': 'agents'},
+{'title': "Войти", 'url_name': 'login'}]
 
 
 def index(request):
     agents = Agent.objects.all()
-    return render(request, 'agents/index.html', {'agents': agents, 'menu': menu, 'title':
-        'Главная страница'})
+    context = {
+    'agents': agents,
+    'menu': menu,
+    'title': 'Главная страница'
+    }
+    return render(request, 'agents/index.html', context=context)
 
 
-def groups(request, group):
+def agents(request):
     if request.GET:
         print(request.GET)
-    return HttpResponse(f"<h1>Список иноагентов: </h1> <div style='color: rgb(94, 25, 10);'>{group}</div")
-
+    return HttpResponse("Агенты")
+    #return HttpResponse(f"<h1>Список агентов: </h1> <div style='color: rgb(94, 25, 10);'>{32}</div")
 
 def about(request):
-    return render(request, 'agents/about.html', {'menu': menu, 'title': ' О сайте'})
+    return render(request, 'agents/about.html', {'menu': menu, 'title': 'О сайте'})
+
+def clients(request):
+    return HttpResponse("Клиенты")
+
+def login(request):
+    return HttpResponse("Авторизация")
+
+def show_client(request, cl_id):
+    return HttpResponse(f"Отображение клиента с id = {cl_id}")
