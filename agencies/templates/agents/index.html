@@ -5,6 +5,7 @@
   <a href="{{ ag.get_absolute_url }}">
     {{ ag.name }} {{ ag.credit | upper }}
   </a>
+  Id: {{ag.agreement.id }} Цена: {{ag.agreement.price }}
 </li>
 {% endfor %}
 <p>Всего агентов: {{ agents | length }}</p>
