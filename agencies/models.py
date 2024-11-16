@@ -4,10 +4,15 @@ from django.urls import reverse
 class Agent(models.Model):
     name = models.CharField(verbose_name="ФИО", max_length=100)
     credit = models.CharField(verbose_name="Контактные данные", max_length=100)
+    photo = models.ImageField(verbose_name="Фото", upload_to=r"photos/%Y/%m/%d/")
     agreement = models.ForeignKey('Agreement', on_delete=models.CASCADE, verbose_name='Договор', null=True)
-
+    slug = models.SlugField(verbose_name='URL', max_length=255, unique=True, db_index=True)
+    created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self): 
+        return reverse('agent', kwargs={'ag_slug': self.slug})
     
     class Meta: 
         verbose_name = 'Агент'
@@ -51,6 +56,7 @@ class Estate(models.Model):
     name = models.SmallIntegerField(verbose_name="Тип недвижимости")
     address = models.CharField(verbose_name="Адрес", max_length=150)
     cadastral_number = models.CharField(verbose_name="Кадастровый номер", max_length=50)
+
     class Meta: 
         verbose_name = 'Недвижимость'
         verbose_name_plural = 'Недвижимости'

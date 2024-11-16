@@ -7,6 +7,7 @@ class AgentAdmin(admin.ModelAdmin):
     search_fields = ('name', 'credit')
     list_editable = ('agreement',)
     list_filter = ('id', 'name', 'agreement')
+    prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Agreement)
 admin.site.register(Agent, AgentAdmin)

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Agent
@@ -36,3 +36,8 @@ def login(request):
 
 def show_client(request, cl_id):
     return HttpResponse(f"Отображение клиента с id = {cl_id}")
+
+def show_agent(request, ag_slug):
+    agent = get_object_or_404(Agent, slug=ag_slug) 
+    context = { 'ag': agent, 'menu': menu, } 
+    return render(request, 'agents/agent.html', context=context)

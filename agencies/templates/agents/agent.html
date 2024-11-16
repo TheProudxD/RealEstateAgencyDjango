@@ -1,0 +1,12 @@
+{% extends 'agents/base.html' %} {% block content %}
+<h1>{{ ag.name }}</h1>
+{% if ag.photo %}
+<p>
+  <img src="{{ ag.photo.url }}" alt="Agent photo" width="200" height="200" />
+</p>
+{% endif %}
+<!--<p>Дата рождения: {{ ag.birth_date }}</p>-->
+<p>Контакты: {{ ag.credit }}</p>
+<p>Договор №: {{ ag.agreement.id }}. Цена: {{ag.agreement.price }}</p>
+<p>Запись добавлена: {{ ag.created_at | date:"d E Y" }}</p>
+{% endblock %}

@@ -2,11 +2,10 @@ body {
     font-family: 'Arial';
     margin: 0;
     padding: 0;
-    height: 100%;
-    width: 100%;
     color: #000000;
     }
 .header {
-    background: #ccff00;
-    height: 100px;
+    margin-top: 10px;
+    background: #d9ff00;
+    height: 120px;
     }
