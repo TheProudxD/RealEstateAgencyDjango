@@ -1,6 +1,8 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from django.shortcuts import render
+
+from agencies.forms import AddAgentForm
 from .models import Agent
 
 menu = [{'title': "О сайте", 'url_name': 'about'},
@@ -41,3 +43,17 @@ def show_agent(request, ag_slug):
     agent = get_object_or_404(Agent, slug=ag_slug) 
     context = { 'ag': agent, 'menu': menu, } 
     return render(request, 'agents/agent.html', context=context)
+
+def addagent(request):
+    if request.method=="POST":
+        form = AddAgentForm(request.POST, request.FILES)
+        if form.is_valid():
+            print(form.cleaned_data)
+            try:
+                form.save()
+                return redirect('home')
+            except:
+                form.add_error(None, 'Ошибка!')
+    else:
+        form = AddAgentForm()
+    return render(request, 'agents/addagent.html', {'form':form})

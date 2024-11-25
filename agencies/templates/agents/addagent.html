@@ -1,0 +1,24 @@
+<!DOCTYPE html> {% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Добавить агента</title>
+    {% comment %}
+    <link
+      rel="shortcut icon"
+      href="{% static 'agents/images/logo.ico' %}"
+      type="image/x-icon"
+    />
+    {% endcomment %}
+  </head>
+  <body>
+    <p>Добавление студента форма</p>
+    <form
+      action="{% url 'addagent' %}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      {% csrf_token %} {{ form.as_p }} <button type="submit">Добавить</button>
+    </form>
+  </body>
+</html>

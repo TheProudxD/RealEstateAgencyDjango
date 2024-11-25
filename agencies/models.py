@@ -8,6 +8,7 @@ class Agent(models.Model):
     agreement = models.ForeignKey('Agreement', on_delete=models.CASCADE, verbose_name='Договор', null=True)
     slug = models.SlugField(verbose_name='URL', max_length=255, unique=True, db_index=True)
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
+    
     def __str__(self):
         return self.name
     
@@ -64,6 +65,9 @@ class Estate(models.Model):
 
 class Agreement(models.Model):
     price = models.IntegerField(verbose_name="Стоимость")
+
+    def __str__(self):
+        return "Договор " + str(self.id)
 
     class Meta: 
         verbose_name = 'Договор'

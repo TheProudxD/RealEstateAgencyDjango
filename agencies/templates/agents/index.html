@@ -6,4 +6,5 @@
 </li>
 {% endfor %}
 <p>Всего агентов: {{ agents | length }}</p>
+<p><a href="{% url 'addagent' %}">Добавить агента</a></p>
 {% endblock %}
