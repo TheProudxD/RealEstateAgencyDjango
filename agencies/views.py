@@ -1,15 +1,40 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView
 from agencies.forms import AddAgentForm
-from .models import Agent
+from .models import Agent, Client
 
 menu = [{'title': "О сайте", 'url_name': 'about'},
 {'title': "Клиенты", 'url_name': 'clients'},
 {'title': "Агенты", 'url_name': 'agents'},
 {'title': "Войти", 'url_name': 'login'}]
 
+class AgentHome(ListView):
+    model = Agent 
+    template_name = 'agents/index.html'
+    context_object_name = 'agents'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Главная страница'
+        context['menu'] = menu
+        return context
+    
+    #def get_queryset(self): 
+    #    return Agent.objects.filter()
+
+class ShowAgent(DetailView): 
+    model = Agent 
+    template_name = 'agents/agent.html' 
+    slug_url_kwarg = 'ag_slug' 
+    context_object_name = 'ag'
+
+class AddStudent(CreateView): 
+    form_class = AddAgentForm
+    template_name = 'agents/addagent.html'
+    success_url = reverse_lazy('home')
 
 def index(request):
     agents = Agent.objects.all()
