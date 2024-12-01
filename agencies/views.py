@@ -5,33 +5,38 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from agencies.forms import AddAgentForm
 from .models import Agent, Client
+from .utils import menu, DataMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-menu = [{'title': "О сайте", 'url_name': 'about'},
-{'title': "Клиенты", 'url_name': 'clients'},
-{'title': "Агенты", 'url_name': 'agents'},
-{'title': "Войти", 'url_name': 'login'}]
-
-class AgentHome(ListView):
+class AgentHome(DataMixin, ListView):
     model = Agent 
     template_name = 'agents/index.html'
     context_object_name = 'agents'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Главная страница'
-        context['menu'] = menu
-        return context
+        auth = self.request.user.is_authenticated
+        c_def = self.get_user_context(title='Главная страница', auth =auth)
+        return {**context, **c_def}
+
     
-    #def get_queryset(self): 
+    #def get_queryset(self):
     #    return Agent.objects.filter()
 
-class ShowAgent(DetailView): 
+class ShowAgent(DataMixin,DetailView):
     model = Agent 
     template_name = 'agents/agent.html' 
     slug_url_kwarg = 'ag_slug' 
     context_object_name = 'ag'
 
-class AddStudent(CreateView): 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context()
+        return {**context, **c_def}
+
+class AddAgent(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('home')
+    raise_exception = True
     form_class = AddAgentForm
     template_name = 'agents/addagent.html'
     success_url = reverse_lazy('home')
