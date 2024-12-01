@@ -12,6 +12,7 @@ class AgentHome(DataMixin, ListView):
     model = Agent 
     template_name = 'agents/index.html'
     context_object_name = 'agents'
+    paginate_by = 3
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -40,16 +41,6 @@ class AddAgent(LoginRequiredMixin, CreateView):
     form_class = AddAgentForm
     template_name = 'agents/addagent.html'
     success_url = reverse_lazy('home')
-
-def index(request):
-    agents = Agent.objects.all()
-    context = {
-    'agents': agents,
-    'menu': menu,
-    'title': 'Главная страница'
-    }
-    return render(request, 'agents/index.html', context=context)
-
 
 def agents(request):
     if request.GET:
