@@ -1,7 +1,8 @@
        .header {
         margin-top: 10px;
         background: #05c0a7;
-        height: 120px;
+        height: 100%;
+        margin=0;
         }
     .list-pages { text-align: center; margin: 0 0 20px 0; } 
     .list-pages ul { margin: 20px 0 0 0; padding: 0; list-style: none; }
@@ -25,3 +26,20 @@
     .list-pages .page-num-selected:hover {
     box-shadow: none;
     }
+    .form-input {
+ width: 200px;
+ font-size: 16px;
+}
+.form-label {
+ display: inline-block;
+ min-width: 75px;
+ vertical-align: top;
+}
+.form-error ul {
+ list-style: none;
+ padding: 0;
+ color: #CC0000;
+}
+.logo{
+    height=100px;
+}

@@ -1,16 +1,35 @@
 <body>
-  {% load static %} {% block mainmenu %}
-  <link
-    type="text/css"
-    href="{% static 'agents/css/styles.css' %}"
-    rel="stylesheet"
-  />
-  <div class="header">
+{% load static %} {% block mainmenu %}
+<head>
+    <title> {{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+            type="text/css"
+            href="{% static 'agents/css/styles.css' %}"
+            rel="stylesheet"
+    />
+</head>
+
+<div class="header">
     <ul id="mainmenu" class="mainmenu">
-      {% for m in menu %}
-      <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
-      {% endfor %}
+
+        <li class="logo"><a href="{% url 'home' %}" alt="dick">
+            <div class="logo"></div>
+        </a></li>
+
+        {% for m in menu %}
+        <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+        {% endfor %}
+
+        {% if request.user.is_authenticated %}
+        <li class="last"> {{user.username}} | <a href="{% url 'logout' %}">Выйти</a></li>
+        {% else %}
+        <li class="last"><a href="{% url 'register' %}">
+            Регистрация</a> | <a href="{% url 'login' %}">Войти</a></li>
+        {% endif %}
+
+        </li>
     </ul>
-  </div>
-  {% endblock mainmenu %} {% block content %} {% endblock content %}
+</div>
+{% endblock mainmenu %} {% block content %} {% endblock content %}
 </body>
