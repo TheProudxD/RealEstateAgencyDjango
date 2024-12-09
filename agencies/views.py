@@ -6,7 +6,9 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
-from .forms import AddAgentForm, RegisterUserForm, LoginUserForm
+
+from agencies.filters import AgentFilter
+from .forms import AddAgentForm, FilterAgentForm, RegisterUserForm, LoginUserForm
 from .models import Agent, Client
 from .utils import menu, DataMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -16,14 +18,21 @@ class AgentHome(DataMixin, ListView):
     model = Agent
     template_name = 'agents/index.html'
     context_object_name = 'agents'
-    paginate_by = 3
+    paginate_by = 5
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         auth = self.request.user.is_authenticated
-        c_def = self.get_user_context(title='Главная страница', auth=auth)
+        queryset = self.get_queryset()
+        ag_filter = AgentFilter(self.request.GET, queryset)
+        c_def = self.get_user_context(title='Главная страница', auth=auth, ag_filter=ag_filter)
         return {**context, **c_def}
-
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        ag_filter = AgentFilter(self.request.GET, queryset)
+        return ag_filter.qs
+    
     # def get_queryset(self):
     #    return Agent.objects.filter()
 

@@ -5,7 +5,7 @@ class Agent(models.Model):
     name = models.CharField(verbose_name="ФИО", max_length=100)
     credit = models.CharField(verbose_name="Контактные данные", max_length=100)
     photo = models.ImageField(verbose_name="Фото", upload_to=r"photos/%Y/%m/%d/")
-    agreement = models.ForeignKey('Agreement', on_delete=models.CASCADE, verbose_name='Договор', null=True)
+    agreement = models.ForeignKey('Agreement', on_delete=models.CASCADE, verbose_name='Договор', related_name='get_agents', null=True)
     slug = models.SlugField(verbose_name='URL', max_length=255, unique=True, db_index=True)
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
     

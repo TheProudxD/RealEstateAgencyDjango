@@ -1,5 +1,9 @@
 {% extends 'agents/base.html' %} {% block content %}
 <h1>{{ title }}</h1>
+<form method="get" action="{% url 'home' %}">
+  {{ ag_filter.form.as_p }}
+  <button type="submit">Искать</button>
+</form>
 {% for ag in agents %}
 <li>
   <a href="{{ ag.get_absolute_url }}"> {{ ag.name| upper }} </a>
