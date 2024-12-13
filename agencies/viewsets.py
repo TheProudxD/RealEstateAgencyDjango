@@ -7,8 +7,12 @@ from django.forms import model_to_dict
 from rest_framework import viewsets
 from rest_framework.decorators import action 
 from .utils import AgentAPIPagination
+from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly, UserPermission
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 class AgentViewSet(viewsets.ModelViewSet):
     pagination_class = AgentAPIPagination
+    permission_classes = [UserPermission]
     # queryset = Agent.objects.all()
     # serializer_class = AgentSerializer
 

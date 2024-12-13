@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Agent(models.Model):
     name = models.CharField(verbose_name="ФИО", max_length=100)
@@ -8,7 +9,8 @@ class Agent(models.Model):
     agreement = models.ForeignKey('Agreement', on_delete=models.CASCADE, verbose_name='Договор', related_name='get_agents', null=True)
     slug = models.SlugField(verbose_name='URL', max_length=255, unique=True, db_index=True)
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True)
-    
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
+
     def __str__(self):
         return self.name
     
