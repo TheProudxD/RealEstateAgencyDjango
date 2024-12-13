@@ -6,8 +6,9 @@ from rest_framework.views import APIView
 from django.forms import model_to_dict
 from rest_framework import viewsets
 from rest_framework.decorators import action 
-
+from .utils import AgentAPIPagination
 class AgentViewSet(viewsets.ModelViewSet):
+    pagination_class = AgentAPIPagination
     # queryset = Agent.objects.all()
     # serializer_class = AgentSerializer
 
