@@ -1,12 +1,105 @@
-{% extends 'agents/base.html' %} {% block content %}
-<h1>{{ ag.name }}</h1>
-{% if ag.photo %}
-<p>
-  <img src="{{ ag.photo.url }}" alt="Agent photo" width="200" height="200" />
-</p>
-{% endif %}
-<!--<p>Дата рождения: {{ ag.birth_date }}</p>-->
-<p>Контакты: {{ ag.credit }}</p>
-<p>Договор №: {{ ag.agreement.id }}. Цена: {{ag.agreement.price }}</p>
-<p>Запись добавлена: {{ ag.created_at | date:"d E Y" }}</p>
+{% extends 'agents/base.html' %} {% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'agents/css/agent_profile.css' %}" />
+<div class="agent-profile-section">
+  <div class="agent-profile-container">
+    <!-- Основная информация об агенте -->
+    <div class="agent-header">
+      <div class="agent-photo-container">
+        {% if ag.photo %}
+        <img
+          src="{{ ag.photo.url }}"
+          alt="{{ ag.name }}"
+          class="agent-profile-photo"
+        />
+        {% else %}
+        <div class="agent-photo-placeholder">
+          <i class="placeholder-icon">👤</i>
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="agent-info">
+        <h1>{{ ag.name }}</h1>
+        <div class="agent-status">Активный агент</div>
+        <div class="agent-stats">
+          <div class="stat-item">
+            <i class="stat-icon">📋</i>
+            <span>Договор №{{ ag.agreement.id }}</span>
+          </div>
+          <div class="stat-item">
+            <i class="stat-icon">💰</i>
+            <span>Стоимость услуг: {{ ag.agreement.price }} ₽</span>
+          </div>
+          <div class="stat-item">
+            <i class="stat-icon">📅</i>
+            <span>С нами с {{ ag.created_at|date:"d.m.Y" }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Контактная информация -->
+    <div class="contact-section">
+      <h2>Контактная информация</h2>
+      <div class="contact-details">
+        <div class="contact-item">
+          <i class="contact-icon">📞</i>
+          <div class="contact-info">
+            <h3>Телефон</h3>
+            <p>{{ ag.credit }}</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <i class="contact-icon">📍</i>
+          <div class="contact-info">
+            <h3>Регион работы</h3>
+            <p>Москва и Московская область</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Специализация -->
+    <div class="specialization-section">
+      <h2>Специализация</h2>
+      <div class="specialization-grid">
+        <div class="spec-item">
+          <i class="spec-icon">🏢</i>
+          <span>Новостройки</span>
+        </div>
+        <div class="spec-item">
+          <i class="spec-icon">🏠</i>
+          <span>Вторичное жилье</span>
+        </div>
+        <div class="spec-item">
+          <i class="spec-icon">🏗️</i>
+          <span>Коммерческая недвижимость</span>
+        </div>
+        <div class="spec-item">
+          <i class="spec-icon">🌳</i>
+          <span>Загородная недвижимость</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Форма обратной связи -->
+    <div class="contact-form-section">
+      <h2>Связаться с агентом</h2>
+      <form class="agent-contact-form">
+        <div class="form-group">
+          <input type="text" placeholder="Ваше имя" required />
+        </div>
+        <div class="form-group">
+          <input type="tel" placeholder="Ваш телефон" required />
+        </div>
+        <div class="form-group">
+          <textarea placeholder="Ваше сообщение" required></textarea>
+        </div>
+        <button type="submit" class="contact-button">
+          Отправить сообщение
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
 {% endblock %}

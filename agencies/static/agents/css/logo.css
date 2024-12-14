@@ -1,0 +1,42 @@
+/* Logo Styles */
+.logo {
+    padding: 0;
+    margin-right: 20px;
+}
+
+.logo a {
+    display: block;
+    padding: 0;
+}
+
+.logo-img {
+    height: 60px;
+    width: auto;
+    display: block;
+}
+
+/* CSS-only Logo */
+.logo a {
+    text-decoration: none;
+    padding: 0;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.logo-text span {
+    color: #e0e0e0;
+    font-weight: 300;
+}
+
+/* Ensure the logo doesn't break the header on mobile */
+@media (max-width: 768px) {
+    .logo-img {
+        height: 50px;
+    }
+}

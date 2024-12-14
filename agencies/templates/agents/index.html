@@ -1,34 +1,129 @@
 {% extends 'agents/base.html' %} {% block content %}
-<h1>{{ title }}</h1>
-<form method="get" action="{% url 'home' %}">
-  {{ ag_filter.form.as_p }}
-  <button type="submit">Искать</button>
-</form>
-{% for ag in agents %}
-<li>
-  <a href="{{ ag.get_absolute_url }}"> {{ ag.name| upper }} </a>
-</li>
-{% endfor %}
-<p>Всего агентов: {{ agents | length }}</p>
-{% if auth %}
-<p><a href="{% url 'addagent' %}">Добавить агента</a></p>
-{% endif %} {% if page_obj.has_other_pages %}
-<nav class="list-pages">
-  {% if page_obj.has_previous %}
-  <li class="page-num">
-    <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
-  </li>
-  {% endif %} {% for p in paginator.page_range %} {% if page_obj.number == p %}
-  <li class="page-num page-num-selected">{{ p }}</li>
-  {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
-  <li class="page-num">
-    <a href="?page={{ p }}">{{ p }}</a>
-  </li>
-  {% endif %} {% endfor %} {% if page_obj.has_next %}
-  <li class="page-num">
-    <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
-  </li>
-  {% endif %}
-</nav>
+<div class="hero-section">
+  <div class="hero-content">
+    <h1>PremiumDom - ваш надежный партнер в мире недвижимости</h1>
+    <p>Профессиональное агентство недвижимости с опытом работы более 10 лет</p>
+  </div>
+</div>
+{% load static %}
+<link rel="stylesheet" href="{% static 'agents/css/index.css' %}" />
 
-{% endif %} {% endblock %}
+<div class="property-types">
+  <h2>Виды недвижимости</h2>
+  <div class="types-grid">
+    <div class="type-card">
+      <i class="type-icon">🏢</i>
+      <h3>Новостройки</h3>
+      <ul>
+        <li>Сданные ЖК</li>
+        <li>Строящиеся ЖК</li>
+        <li>С отделкой</li>
+      </ul>
+    </div>
+    <div class="type-card">
+      <i class="type-icon">🏠</i>
+      <h3>Вторичное жилье</h3>
+      <ul>
+        <li>Однокомнатные</li>
+        <li>Двухкомнатные</li>
+        <li>Трехкомнатные</li>
+        <li>Многокомнатные</li>
+      </ul>
+    </div>
+    <div class="type-card">
+      <i class="type-icon">🏗️</i>
+      <h3>Коммерческая</h3>
+      <ul>
+        <li>Офисы</li>
+        <li>Торговые помещения</li>
+        <li>Склады</li>
+        <li>Готовый бизнес</li>
+      </ul>
+    </div>
+    <div class="type-card">
+      <i class="type-icon">🌳</i>
+      <h3>Загородная</h3>
+      <ul>
+        <li>Дома и коттеджи</li>
+        <li>Таунхаусы</li>
+        <li>Земельные участки</li>
+        <li>Дачи</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="advantages">
+  <h2>Наши преимущества</h2>
+  <div class="advantages-grid">
+    <div class="advantage-card">
+      <i class="advantage-icon">⭐</i>
+      <h3>Опыт работы более 10 лет</h3>
+      <p>
+        За нашими плечами годы работы и тысячи совершенных сделок с самой разной
+        недвижимостью
+      </p>
+    </div>
+    <div class="advantage-card">
+      <i class="advantage-icon">🤝</i>
+      <h3>Гибкие условия</h3>
+      <p>Выполняем свою работу тщательно по каждой сделке в любых ситуациях</p>
+    </div>
+    <div class="advantage-card">
+      <i class="advantage-icon">🔑</i>
+      <h3>Сопровождение "под ключ"</h3>
+      <p>
+        Полное сопровождение от подбора недвижимости до оформления права
+        собственности
+      </p>
+    </div>
+    <div class="advantage-card">
+      <i class="advantage-icon">📊</i>
+      <h3>Детальное знание рынка</h3>
+      <p>
+        Знаем все нюансы рынка недвижимости для обеспечения максимальной выгоды
+        клиентам
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="services">
+  <h2>Наши услуги</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <h3>Покупка</h3>
+      <p>Помощь в подборе и приобретении недвижимости</p>
+      <a href="#" class="service-button">Подробнее</a>
+    </div>
+    <div class="service-card">
+      <h3>Продажа</h3>
+      <p>Быстрая и выгодная продажа вашей недвижимости</p>
+      <a href="#" class="service-button">Подробнее</a>
+    </div>
+    <div class="service-card">
+      <h3>Сопровождение сделки</h3>
+      <p>Юридическое сопровождение на всех этапах</p>
+      <a href="#" class="service-button">Подробнее</a>
+    </div>
+  </div>
+</div>
+
+<div class="contact-section">
+  <h2>Остались вопросы?</h2>
+  <div class="contact-container">
+    <div class="contact-info">
+      <h3>Свяжитесь с нами</h3>
+      <p>Наши специалисты работают с 9:00 до 20:00</p>
+      <p class="phone">+7 (XXX) XXX-XX-XX</p>
+      <p class="email">info@premiumdom.ru</p>
+    </div>
+    <form class="contact-form">
+      <input type="text" placeholder="Ваше имя" required />
+      <input type="tel" placeholder="Ваш телефон" required />
+      <textarea placeholder="Ваше сообщение" required></textarea>
+      <button type="submit" class="submit-button">Отправить</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

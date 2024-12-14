@@ -1,0 +1,110 @@
+{% extends 'agents/base.html' %} {% load static %} {% block content %}
+<div class="agents-page">
+  <!-- Hero Section -->
+  <div class="agents-hero">
+    <div class="hero-content">
+      <h1>Наши специалисты</h1>
+      <p>Профессиональные агенты с многолетним опытом работы</p>
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section">
+    <div class="search-container">
+      <h2>Поиск агента</h2>
+      <form method="get" action="{% url 'agents' %}" class="search-form">
+        {{ ag_filter.form.as_p }}
+        <button type="submit" class="search-button">
+          <i class="search-icon">🔍</i>
+          Найти
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Agents Grid Section -->
+  <div class="agents-section">
+    <div class="agents-container">
+      <div class="agents-grid">
+        {% for ag in agents %} {% if agents %}
+        <div class="agent-card">
+          <div class="agent-image">
+            {% if ag.photo %}
+            <img
+              src="{{ ag.photo.url }}"
+              alt="{{ ag.name }}"
+              class="agent-photo"
+            />
+            {% else %}
+            <div class="agent-photo-placeholder">
+              <i class="placeholder-icon">👤</i>
+            </div>
+            {% endif %}
+          </div>
+          <div class="agent-info">
+            <h3 class="agent-name">{{ ag.name }}</h3>
+            <p class="agent-contact">{{ ag.credit }}</p>
+            <div class="agent-stats">
+              <div class="stat">
+                <i class="stat-icon">📋</i>
+                <span>{{ ag.agreement.id }}</span>
+              </div>
+              <div class="stat">
+                <i class="stat-icon">💰</i>
+                <span>{{ ag.agreement.price }}₽</span>
+              </div>
+            </div>
+            <a href="{{ ag.get_absolute_url }}" class="agent-link">Подробнее</a>
+          </div>
+        </div>
+        {% endif %} {% empty %}
+        <div class="no-results">
+          <i class="no-results-icon">🔍</i>
+          <p>Агенты не найдены</p>
+          <a href="{% url 'agents' %}" class="reset-search">Сбросить поиск</a>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Pagination -->
+      {% if page_obj.has_other_pages %}
+      <div class="pagination">
+        <div class="pagination-container">
+          {% if page_obj.has_previous %}
+          <a href="?page=1" class="pagination-link first-page">
+            <i class="pagination-icon">⟪</i>
+          </a>
+          <a
+            href="?page={{ page_obj.previous_page_number }}"
+            class="pagination-link"
+          >
+            <i class="pagination-icon">←</i>
+          </a>
+          {% endif %} {% for p in paginator.page_range %}
+          <a
+            href="?page={{ p }}"
+            class="pagination-link {% if page_obj.number == p %}active{% endif %}"
+          >
+            {{ p }}
+          </a>
+          {% endfor %} {% if page_obj.has_next %}
+          <a
+            href="?page={{ page_obj.next_page_number }}"
+            class="pagination-link"
+          >
+            <i class="pagination-icon">→</i>
+          </a>
+          <a
+            href="?page={{ page_obj.paginator.num_pages }}"
+            class="pagination-link last-page"
+          >
+            <i class="pagination-icon">⟫</i>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

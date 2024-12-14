@@ -1,9 +1,9 @@
 from rest_framework.pagination import PageNumberPagination
 
-
-menu = [{'title': "О сайте", 'url_name': 'about'},
-{'title': "Клиенты", 'url_name': 'clients'},
+menu = [{'title': "Главная", 'url_name': 'home'},
+{'title': "О нас", 'url_name': 'about'},
 {'title': "Агенты", 'url_name': 'agents'}]
+
 class DataMixin:
     def get_user_context(self, **kwargs):
         context = kwargs

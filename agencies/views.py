@@ -14,6 +14,27 @@ from .utils import menu, DataMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+class AgentsView(DataMixin, ListView):
+    model = Agent
+    template_name = 'agents/agents_list.html'
+    context_object_name = 'agents'
+    paginate_by = 3
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        auth = self.request.user.is_authenticated
+        queryset = self.get_queryset()
+        ag_filter = AgentFilter(self.request.GET, queryset)
+        c_def = self.get_user_context(title='Наши агенты', auth=auth, ag_filter=ag_filter)
+        return {**context, **c_def}
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        ag_filter = AgentFilter(self.request.GET, queryset)
+        return ag_filter.qs
+        
+    # def get_queryset(self):
+    #    return Agent.objects.filter()
 class AgentHome(DataMixin, ListView):
     model = Agent
     template_name = 'agents/index.html'
@@ -33,8 +54,7 @@ class AgentHome(DataMixin, ListView):
         ag_filter = AgentFilter(self.request.GET, queryset)
         return ag_filter.qs
     
-    # def get_queryset(self):
-    #    return Agent.objects.filter()
+   
 
 
 class ShowAgent(DataMixin, DetailView):

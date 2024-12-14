@@ -1,22 +1,44 @@
-<!DOCTYPE html> {% load static %}
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Добавить агента</title>
-    <link
-      rel="shortcut icon"
-      href="{% static 'agents/images/logo.ico' %}"
-      type="image/x-icon"
-    />
-  </head>
-  <body>
-    <p>Добавление студента форма</p>
+{% extends 'agents/base.html' %} {% load static %} {% block content %}
+<div class="add-agent-section">
+  <div class="form-container">
+    <h1>Добавление нового агента</h1>
+
     <form
       action="{% url 'addagent' %}"
       method="post"
       enctype="multipart/form-data"
+      class="add-agent-form"
     >
-      {% csrf_token %} {{ form.as_p }} <button type="submit">Добавить</button>
+      {% block extra_css %}
+      <link
+        rel="stylesheet"
+        href="{% static 'agents/css/agent_profile.css' %}"
+      />
+      {% endblock %} {% block extra_js %}
+      <script src="{% static 'agents/js/add_agent.js' %}"></script>
+      {% endblock %} {% csrf_token %} {% for field in form %}
+      <div class="form-group">
+        <label class="form-label" for="{{ field.id_for_label }}">
+          {{ field.label }} {% if field.field.required %}
+          <span class="required">*</span>
+          {% endif %}
+        </label>
+
+        <div class="field-wrapper">
+          {{ field }} {% if field.help_text %}
+          <small class="help-text">{{ field.help_text }}</small>
+          {% endif %} {% if field.errors %}
+          <div class="error-message">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="form-actions">
+        <button type="submit" class="submit-button">Добавить агента</button>
+        <a href="{% url 'agents' %}" class="cancel-button">Отмена</a>
+      </div>
     </form>
-  </body>
-</html>
+  </div>
+</div>
+{% endblock %}
