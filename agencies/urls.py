@@ -25,4 +25,5 @@ path('api/v1/agreements/', AgreementAPIView.as_view()),
 #path('api/v1/agents/', AgentViewSet.as_view({'get': 'list'})), 
 #path('api/v1/agent/<int:pk>/', AgentViewSet.as_view({'put': 'update'})),
 path('api/v1/', include(router.urls)),
+path('api/v1/auth/', include('rest_framework.urls')),
 ]

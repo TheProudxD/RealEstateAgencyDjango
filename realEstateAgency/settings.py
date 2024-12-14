@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'agencies.apps.AgenciesConfig',
     'django_filters',
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +133,11 @@ MEDIA_URL = '/media/'
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = []
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication', 
+        'rest_framework.authentication.BasicAuthentication', 
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
