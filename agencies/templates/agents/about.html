@@ -1,54 +1,223 @@
 {% extends 'agents/base.html' %} {% block content %} {% load static %}
 <link rel="stylesheet" href="{% static 'agents/css/about.css' %}" />
 
-<h1>{{ title }}</h1>
-<div class="about-content">
-  <h2>О нашем агентстве недвижимости</h2>
-
-  <p>
-    Добро пожаловать в "ПремиумДом" – ваш надёжный партнер на рынке недвижимости
-    с 2010 года. Мы специализируемся на предоставлении полного спектра услуг в
-    сфере недвижимости, делая процесс покупки, продажи или аренды максимально
-    комфортным для наших клиентов.
-  </p>
-
-  <h3>Наши преимущества:</h3>
-  <ul>
-    <li>Команда профессиональных риелторов с опытом работы более 10 лет</li>
-    <li>Индивидуальный подход к каждому клиенту</li>
-    <li>Полное юридическое сопровождение сделок</li>
-    <li>Работа с объектами любой сложности</li>
-    <li>Гарантия безопасности и прозрачности всех операций</li>
-  </ul>
-
-  <h3>Наши услуги:</h3>
-  <ul>
-    <li>Покупка и продажа жилой недвижимости</li>
-    <li>Аренда коммерческих помещений</li>
-    <li>Юридическое сопровождение сделок</li>
-    <li>Оценка недвижимости</li>
-    <li>Ипотечный брокеридж</li>
-    <li>Консультации по инвестициям в недвижимость</li>
-  </ul>
-
-  <p>
-    За годы работы мы помогли более 5000 клиентам обрести новый дом или выгодно
-    инвестировать средства в недвижимость. Наша главная цель – не просто
-    заключить сделку, а найти оптимальное решение для каждого клиента.
-  </p>
-
-  <h3>Наши контакты:</h3>
-  <p>
-    Адрес: г. Москва, ул. Тверская, д. 15<br />
-    Телефон: +7 (495) 123-45-67<br />
-    Email: info@premiumdom.ru
-  </p>
-
-  <p>
-    Время работы:<br />
-    Пн-Пт: 9:00 - 20:00<br />
-    Сб: 10:00 - 18:00<br />
-    Вс: по предварительной записи
-  </p>
+<div class="about-hero">
+  <h1 class="about-title">Об агентстве</h1>
+  <div class="hero-overlay"></div>
 </div>
+
+<div class="about-content">
+  <div class="section company-intro">
+    <div class="company-description">
+      <div class="description-text">
+        <p class="highlight-text">
+          Добро пожаловать в "ПремиумДом" – ваш надёжный партнер на рынке
+          недвижимости с 2010 года. Мы специализируемся на предоставлении
+          полного спектра услуг в сфере недвижимости, делая процесс покупки,
+          продажи или аренды максимально комфортным для наших клиентов.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section advantages">
+    <h3>Наши преимущества</h3>
+    <div class="advantages-grid">
+      <div class="advantage-card">
+        <span class="advantage-icon">👥</span>
+        <h4>Опытная команда</h4>
+        <p>Профессиональные риелторы с опытом работы более 10 лет</p>
+      </div>
+      <div class="advantage-card">
+        <span class="advantage-icon">🎯</span>
+        <h4>Индивидуальный подход</h4>
+        <p>Персональное внимание к каждому клиенту</p>
+      </div>
+      <div class="advantage-card">
+        <span class="advantage-icon">⚖️</span>
+        <h4>Юридическая поддержка</h4>
+        <p>Полное юридическое сопровождение сделок</p>
+      </div>
+      <div class="advantage-card">
+        <span class="advantage-icon">🏢</span>
+        <h4>Любая сложность</h4>
+        <p>Работа с объектами любой сложности</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section services">
+    <h3>Наши услуги</h3>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🏠</div>
+        <h4>Покупка и продажа</h4>
+        <p>Жилая недвижимость</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏢</div>
+        <h4>Аренда</h4>
+        <p>Коммерческие помещения</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <h4>Оценка</h4>
+        <p>Оценка недвижимости</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💰</div>
+        <h4>Ипотека</h4>
+        <p>Ипотечный брокеридж</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section stats">
+    <div class="stat-item">
+      <span class="stat-number">5000+</span>
+      <span class="stat-label">Довольных клиентов</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">13</span>
+      <span class="stat-label">Лет опыта</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">1000+</span>
+      <span class="stat-label">Успешных сделок</span>
+    </div>
+  </div>
+
+  <div class="section contact-info">
+    <h3>Наши контакты</h3>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span class="contact-icon">📍</span>
+        <h4>Адрес</h4>
+        <p>г. Иваново, ул. Рабфаковская, д. 34</p>
+      </div>
+      <div class="contact-card">
+        <span class="contact-icon">📞</span>
+        <h4>Телефон</h4>
+        <p>+7 (495) 123-45-67</p>
+      </div>
+      <div class="contact-card">
+        <span class="contact-icon">📧</span>
+        <h4>Email</h4>
+        <p>info@premiumdom.ru</p>
+      </div>
+      <div class="contact-card">
+        <span class="contact-icon">🕒</span>
+        <h4>Время работы</h4>
+        <p>
+          Пн-Пт: 9:00 - 20:00<br />
+          Сб: 10:00 - 18:00<br />
+          Вс: по записи
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .about-hero {
+    position: relative;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url("/static/agents/images/hero-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 60px;
+  }
+
+  .about-title {
+    color: white;
+    font-size: 4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-out;
+    z-index: 2;
+  }
+
+  .about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .section {
+    margin-bottom: 80px;
+  }
+
+  .section h2,
+  .section h3 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 40px;
+  }
+
+  .highlight-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #34495e;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .advantages-grid,
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .advantage-card,
+  .service-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  .advantage-card:hover,
+  .service-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .advantage-icon,
+  .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+
+  .stat-label {
+    display: block;
+    color: #7f8c8d;
+  }
+</style>
 {% endblock %}

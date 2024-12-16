@@ -33,6 +33,7 @@ class AgentsView(DataMixin, ListView):
         ag_filter = AgentFilter(self.request.GET, queryset)
         return ag_filter.qs
         
+        
     # def get_queryset(self):
     #    return Agent.objects.filter()
 class AgentHome(DataMixin, ListView):
@@ -140,7 +141,7 @@ def logout_user(request):
 class LoginUser(DataMixin, LoginView):
     form_class = LoginUserForm
     template_name = 'agents/login.html'
-
+    
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title="Авторизация")
@@ -148,3 +149,8 @@ class LoginUser(DataMixin, LoginView):
 
     def get_success_url(self):
         return reverse_lazy('home')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        # После успешной аутентификации перенаправляем на главную
+        return response

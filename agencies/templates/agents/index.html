@@ -1,10 +1,38 @@
 {% extends 'agents/base.html' %} {% block content %}
 <div class="hero-section">
   <div class="hero-content">
-    <h1>PremiumDom - ваш надежный партнер в мире недвижимости</h1>
-    <p>Профессиональное агентство недвижимости с опытом работы более 10 лет</p>
+    <div class="hero-title"><span class="highlight">Premium</span>Dom</div>
+    <h1 class="hero-main-title">Ваш надежный партнер в мире недвижимости</h1>
+    <p class="hero-subtitle">
+      Профессиональное агентство с опытом работы более 10 лет
+    </p>
+    <div class="hero-buttons">
+      <a href="{% url 'agents' %}" class="hero-button primary">
+        <i class="button-icon">👥</i>
+        Найти агента
+      </a>
+      <a href="#contact" class="hero-button secondary">
+        <i class="button-icon">📞</i>
+        Связаться с нами
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-number">10+</span>
+        <span class="stat-label">лет опыта</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">1000+</span>
+        <span class="stat-label">сделок</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">500+</span>
+        <span class="stat-label">клиентов</span>
+      </div>
+    </div>
   </div>
 </div>
+
 {% load static %}
 <link rel="stylesheet" href="{% static 'agents/css/index.css' %}" />
 
@@ -12,7 +40,7 @@
   <h2>Виды недвижимости</h2>
   <div class="types-grid">
     <div class="type-card">
-      <i class="type-icon">🏢</i>
+      <span class="type-icon">🏢</span>
       <h3>Новостройки</h3>
       <ul>
         <li>Сданные ЖК</li>
@@ -21,7 +49,7 @@
       </ul>
     </div>
     <div class="type-card">
-      <i class="type-icon">🏠</i>
+      <span class="type-icon">🏠</span>
       <h3>Вторичное жилье</h3>
       <ul>
         <li>Однокомнатные</li>
@@ -31,7 +59,7 @@
       </ul>
     </div>
     <div class="type-card">
-      <i class="type-icon">🏗️</i>
+      <span class="type-icon">🏗️</span>
       <h3>Коммерческая</h3>
       <ul>
         <li>Офисы</li>
@@ -41,7 +69,7 @@
       </ul>
     </div>
     <div class="type-card">
-      <i class="type-icon">🌳</i>
+      <span class="type-icon">🌳</span>
       <h3>Загородная</h3>
       <ul>
         <li>Дома и коттеджи</li>
@@ -57,7 +85,7 @@
   <h2>Наши преимущества</h2>
   <div class="advantages-grid">
     <div class="advantage-card">
-      <i class="advantage-icon">⭐</i>
+      <span class="advantage-icon">⭐</span>
       <h3>Опыт работы более 10 лет</h3>
       <p>
         За нашими плечами годы работы и тысячи совершенных сделок с самой разной
@@ -94,28 +122,77 @@
     <div class="service-card">
       <h3>Покупка</h3>
       <p>Помощь в подборе и приобретении недвижимости</p>
-      <a href="#" class="service-button">Подробнее</a>
+      <button onclick="openModal('buyModal')" class="service-button">
+        Подробнее
+      </button>
     </div>
     <div class="service-card">
       <h3>Продажа</h3>
       <p>Быстрая и выгодная продажа вашей недвижимости</p>
-      <a href="#" class="service-button">Подробнее</a>
+      <button onclick="openModal('sellModal')" class="service-button">
+        Подробнее
+      </button>
     </div>
     <div class="service-card">
       <h3>Сопровождение сделки</h3>
       <p>Юридическое сопровождение на всех этапах</p>
-      <a href="#" class="service-button">Подробнее</a>
+      <button onclick="openModal('supportModal')" class="service-button">
+        Подробнее
+      </button>
     </div>
   </div>
 </div>
 
-<div class="contact-section">
+<!-- Модальные окна -->
+<div id="buyModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('buyModal')">&times;</span>
+    <h2>Услуги по покупке недвижимости</h2>
+    <ul>
+      <li>Подбор объектов по вашим критериям</li>
+      <li>Организация просмотров</li>
+      <li>Проверка юридической чистоты</li>
+      <li>Помощь в получении ипотеки</li>
+      <li>Сопровождение сделки купли-продажи</li>
+    </ul>
+  </div>
+</div>
+
+<div id="sellModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('sellModal')">&times;</span>
+    <h2>Услуги по продаже недвижимости</h2>
+    <ul>
+      <li>Оценка рыночной стоимости</li>
+      <li>Профессиональная фотосъёмка</li>
+      <li>Размещение объявлений</li>
+      <li>Организация показов</li>
+      <li>Проведение переговоров с покупателями</li>
+    </ul>
+  </div>
+</div>
+
+<div id="supportModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('supportModal')">&times;</span>
+    <h2>Сопровождение сделок</h2>
+    <ul>
+      <li>Проверка документов</li>
+      <li>Составление договоров</li>
+      <li>Организация безопасных расчётов</li>
+      <li>Представление интересов в госорганах</li>
+      <li>Регистрация права собственности</li>
+    </ul>
+  </div>
+</div>
+
+<div id="contact" class="contact-section">
   <h2>Остались вопросы?</h2>
   <div class="contact-container">
     <div class="contact-info">
       <h3>Свяжитесь с нами</h3>
       <p>Наши специалисты работают с 9:00 до 20:00</p>
-      <p class="phone">+7 (XXX) XXX-XX-XX</p>
+      <p class="phone">+7 (495) 123-45-67</p>
       <p class="email">info@premiumdom.ru</p>
     </div>
     <form class="contact-form">
@@ -126,4 +203,192 @@
     </form>
   </div>
 </div>
+
+<button id="scrollToTop" class="scroll-to-top">
+  <span class="arrow-up">↑</span>
+</button>
+
+<script>
+  function openModal(modalId) {
+    document.getElementById(modalId).style.display = "block";
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+  }
+
+  // Закрытие модального окна при клике вне его
+  window.onclick = function (event) {
+    if (event.target.classList.contains("modal")) {
+      event.target.style.display = "none";
+    }
+  };
+
+  // Плавная прокрутка к секции контактов
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
+  });
+
+  // Кнопка "наверх"
+  const scrollToTopButton = document.getElementById("scrollToTop");
+
+  // Показать/скрыть кнопку при прокрутке
+  window.addEventListener("scroll", () => {
+    if (window.pageYOffset > 300) {
+      // Показывать кнопку после прокрутки на 300px
+      scrollToTopButton.classList.add("show");
+    } else {
+      scrollToTopButton.classList.remove("show");
+    }
+  });
+
+  // Прокрутка наверх при клике
+  scrollToTopButton.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+</script>
+
+<style>
+  .scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #05c0a7;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+
+  .scroll-to-top:hover {
+    background-color: #048f7d;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .arrow-up {
+    font-style: normal;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-5px);
+    }
+    60% {
+      transform: translateY(-3px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .scroll-to-top {
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+    }
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+
+  .hero-button {
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .button-icon {
+    font-style: normal;
+    font-size: 1.2rem;
+  }
+
+  .hero-button.primary {
+    background: #05c0a7;
+    color: white;
+    border: 2px solid #05c0a7;
+  }
+
+  .hero-button.primary:hover {
+    background: #048f7d;
+    border-color: #048f7d;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-button.secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    backdrop-filter: blur(5px);
+  }
+
+  .hero-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .hero-buttons {
+      flex-direction: column;
+      gap: 1rem;
+      padding: 0 20px;
+    }
+
+    .hero-button {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 24px;
+      font-size: 1rem;
+    }
+  }
+</style>
 {% endblock %}

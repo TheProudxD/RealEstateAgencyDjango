@@ -25,7 +25,7 @@ urlpatterns = [
     path('', include('agencies.urls')),
     path('api/v1/auth-session/', include('rest_framework.urls')),
     path('api/v1/auth/', include('djoser.urls')),
-    re_path(r'^auth/', include('djoser.urls.authtoken')),
+    re_path(r'^auth/', include('djoser.urls')),
 ]
 
 if settings.DEBUG: 

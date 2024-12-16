@@ -134,10 +134,18 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = []
 
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login' 
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication', 
         'rest_framework.authentication.BasicAuthentication', 
         'rest_framework.authentication.SessionAuthentication',
     ],
+}
+DJOSER = {
+    'LOGIN_FIELD': 'username',
+    'USER_CREATE_PASSWORD_RETYPE': True,
+    'SERIALIZERS': {},
 }
