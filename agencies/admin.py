@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Agent, Agreement
+from .models import Agent, Agreement, Message
 
 class AgentAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'credit', 'agreement')
@@ -11,3 +11,4 @@ class AgentAdmin(admin.ModelAdmin):
 
 admin.site.register(Agreement)
 admin.site.register(Agent, AgentAdmin)
+admin.site.register(Message)

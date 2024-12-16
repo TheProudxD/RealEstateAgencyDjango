@@ -6,9 +6,9 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
-
+from django.contrib import messages
 from agencies.filters import AgentFilter
-from .forms import AddAgentForm, FilterAgentForm, RegisterUserForm, LoginUserForm
+from .forms import AddAgentForm, FilterAgentForm, RegisterUserForm, LoginUserForm, ContactForm
 from .models import Agent, Client
 from .utils import menu, DataMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -47,7 +47,13 @@ class AgentHome(DataMixin, ListView):
         auth = self.request.user.is_authenticated
         queryset = self.get_queryset()
         ag_filter = AgentFilter(self.request.GET, queryset)
-        c_def = self.get_user_context(title='Главная страница', auth=auth, ag_filter=ag_filter)
+        contact_form = ContactForm()
+        c_def = self.get_user_context(
+            title='Главная страница', 
+            auth=auth, 
+            ag_filter=ag_filter,
+            contact_form=contact_form
+        )
         return {**context, **c_def}
     
     def get_queryset(self):
@@ -55,7 +61,14 @@ class AgentHome(DataMixin, ListView):
         ag_filter = AgentFilter(self.request.GET, queryset)
         return ag_filter.qs
     
-   
+    def post(self, request, *args, **kwargs):
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Сообщение успешно отправлено!')
+            return redirect('home')
+        return self.get(request, *args, **kwargs)
+    
 
 
 class ShowAgent(DataMixin, DetailView):
@@ -68,6 +81,17 @@ class ShowAgent(DataMixin, DetailView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context()
         return {**context, **c_def}
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Сообщение успешно отправлено!')
+            return redirect('agents')
+        else:
+            messages.error(request, 'Ошибка при отправке сообщения')
+            return self.get(request, *args, **kwargs)
 
 
 class AddAgent(LoginRequiredMixin, CreateView):
@@ -82,7 +106,6 @@ def agents(request):
     if request.GET:
         print(request.GET)
     return HttpResponse("Агенты")
-    # return HttpResponse(f"<h1>Список агентов: </h1> <div style='color: rgb(94, 25, 10);'>{32}</div")
 
 
 def about(request):

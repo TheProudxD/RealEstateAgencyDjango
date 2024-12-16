@@ -7,7 +7,7 @@ class AgentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Agent
-        fields = ('name', 'credit', "agreement", "slug")
+        fields = ('name', 'credit', "agreement", "slug", "user")
 
 class AgentModel:
     def __init__(self, name, credit):

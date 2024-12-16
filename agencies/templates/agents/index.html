@@ -7,14 +7,8 @@
       Профессиональное агентство с опытом работы более 10 лет
     </p>
     <div class="hero-buttons">
-      <a href="{% url 'agents' %}" class="hero-button primary">
-        <i class="button-icon">👥</i>
-        Найти агента
-      </a>
-      <a href="#contact" class="hero-button secondary">
-        <i class="button-icon">📞</i>
-        Связаться с нами
-      </a>
+      <a href="{% url 'agents' %}" class="hero-button primary">Найти агента</a>
+      <a href="#contact" class="hero-button secondary">Связаться с нами</a>
     </div>
     <div class="hero-stats">
       <div class="stat-item">
@@ -22,11 +16,11 @@
         <span class="stat-label">лет опыта</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">1000+</span>
+        <span class="stat-number">1500+</span>
         <span class="stat-label">сделок</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">500+</span>
+        <span class="stat-number">800+</span>
         <span class="stat-label">клиентов</span>
       </div>
     </div>
@@ -186,23 +180,58 @@
   </div>
 </div>
 
-<div id="contact" class="contact-section">
-  <h2>Остались вопросы?</h2>
-  <div class="contact-container">
-    <div class="contact-info">
-      <h3>Свяжитесь с нами</h3>
-      <p>Наши специалисты работают с 9:00 до 20:00</p>
-      <p class="phone">+7 (495) 123-45-67</p>
-      <p class="email">info@premiumdom.ru</p>
+<section class="contact-section" id="contact">
+  <div class="contact-content">
+    <h2 class="contact-title">Свяжитесь с нами</h2>
+    <p class="contact-description">
+      Оставьте сообщение, и мы свяжемся с вами в ближайшее время
+    </p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-info-item">
+          <i class="contact-icon">📍</i>
+          <h3>Адрес</h3>
+          <p>г. Иваново, ул. Рабфаковская, д. 34</p>
+        </div>
+        <div class="contact-info-item">
+          <i class="contact-icon">📞</i>
+          <h3>Телефон</h3>
+          <p>+7 (999) 123-45-67</p>
+        </div>
+        <div class="contact-info-item">
+          <i class="contact-icon">✉️</i>
+          <h3>Email</h3>
+          <p>info@premiumdom.ru</p>
+        </div>
+        <div class="contact-info-item">
+          <i class="contact-icon">⏰</i>
+          <h3>Режим работы</h3>
+          <p>Пн-Пт: 9:00 - 20:00</p>
+          <p>Сб-Вс: 10:00 - 18:00</p>
+        </div>
+      </div>
+
+      <div class="contact-form-wrapper">
+        {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+          <div class="message {{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post" class="contact-form">
+          {% csrf_token %} {{ contact_form.as_p }}
+          <button type="submit" class="submit-button">
+            <span class="button-text">Отправить сообщение</span>
+            <span class="button-icon">→</span>
+          </button>
+        </form>
+      </div>
     </div>
-    <form class="contact-form">
-      <input type="text" placeholder="Ваше имя" required />
-      <input type="tel" placeholder="Ваш телефон" required />
-      <textarea placeholder="Ваше сообщение" required></textarea>
-      <button type="submit" class="submit-button">Отправить</button>
-    </form>
   </div>
-</div>
+</section>
 
 <button id="scrollToTop" class="scroll-to-top">
   <span class="arrow-up">↑</span>
@@ -387,6 +416,192 @@
       width: 100%;
       justify-content: center;
       padding: 14px 24px;
+      font-size: 1rem;
+    }
+  }
+
+  .contact-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+  }
+
+  .contact-content {
+    background: white;
+    padding: 60px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-title {
+    font-size: 3rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .contact-description {
+    color: #7f8c8d;
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 1.2rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 50px;
+  }
+
+  .contact-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .contact-info-item {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .contact-info-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  .contact-info-item h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  .contact-info-item p {
+    color: #7f8c8d;
+    margin: 5px 0;
+  }
+
+  .contact-form-wrapper {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .contact-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .contact-textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    min-height: 150px;
+    resize: vertical;
+    transition: all 0.3s ease;
+  }
+
+  .contact-input:focus,
+  .contact-textarea:focus {
+    border-color: #05c0a7;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(5, 192, 167, 0.1);
+  }
+
+  .submit-button {
+    background: #05c0a7;
+    color: white;
+    border: none;
+    padding: 18px 35px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .submit-button:hover {
+    background: #048f7d;
+    transform: translateY(-2px);
+  }
+
+  .button-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .submit-button:hover .button-icon {
+    transform: translateX(5px);
+  }
+
+  .messages {
+    margin-bottom: 20px;
+  }
+
+  .message {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+
+  .message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
+  @media (max-width: 992px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-info {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-content {
+      padding: 30px;
+    }
+
+    .contact-title {
+      font-size: 2rem;
+    }
+
+    .contact-info {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-description {
       font-size: 1rem;
     }
   }

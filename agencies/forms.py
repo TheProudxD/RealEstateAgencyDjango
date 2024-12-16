@@ -1,6 +1,6 @@
 from django import forms
 
-from agencies.models import Agent, Agreement
+from agencies.models import Agent, Agreement, Message
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
@@ -44,3 +44,14 @@ class LoginUserForm(AuthenticationForm):
 class FilterAgentForm(forms.Form): 
     name = forms.CharField(label='Имя', max_length=50, required=False)
     agreement = forms.ModelChoiceField(label='Договор', queryset=Agreement.objects.all(), empty_label='', required=False)
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['name', 'email', 'subject', 'message']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'contact-input', 'placeholder': 'Ваше имя'}),
+            'email': forms.EmailInput(attrs={'class': 'contact-input', 'placeholder': 'Ваш email'}),
+            'subject': forms.TextInput(attrs={'class': 'contact-input', 'placeholder': 'Тема сообщения'}),
+            'message': forms.Textarea(attrs={'class': 'contact-textarea', 'placeholder': 'Ваше сообщение'})
+        }

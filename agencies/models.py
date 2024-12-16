@@ -74,3 +74,18 @@ class Agreement(models.Model):
     class Meta: 
         verbose_name = 'Договор'
         verbose_name_plural = 'Договоры'
+
+class Message(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Имя")
+    email = models.EmailField(verbose_name="Email")
+    subject = models.CharField(max_length=200, verbose_name="Тема")
+    message = models.TextField(verbose_name="Сообщение")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата отправки")
+
+    class Meta:
+        verbose_name = 'Сообщение'
+        verbose_name_plural = 'Сообщения'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Сообщение от {self.name}"

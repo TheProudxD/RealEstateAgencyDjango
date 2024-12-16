@@ -13,7 +13,17 @@ class AgentFilter(django_filters.FilterSet):
             'class': 'search-input'
         })
     )
+    
+    price = django_filters.CharFilter(
+        field_name='agreement__price',
+        lookup_expr='lte',
+        label='',
+        widget=django_filters.widgets.forms.TextInput(attrs={
+            'placeholder': 'Поиск по стоимости...',
+            'class': 'search-input'
+        })
+    )
 
     class Meta:
         model = Agent
-        fields = ['name']
+        fields = ['name', 'price']

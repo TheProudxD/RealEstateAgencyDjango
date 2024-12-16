@@ -3,8 +3,10 @@
   <!-- Hero Section -->
   <div class="agents-hero">
     <div class="hero-content">
-      <h1>Наши специалисты</h1>
-      <p>Профессиональные агенты с многолетним опытом работы</p>
+      <h1 class="agents-title">Наши специалисты</h1>
+      <p class="agents-subtitle">
+        Профессиональные агенты с многолетним опытом работы
+      </p>
       {% if request.user.is_authenticated %}
       <a href="{% url 'addagent' %}" class="add-agent-button">
         <span class="add-icon">+</span>
@@ -26,13 +28,11 @@
       </p>
 
       <form method="get" class="search-form">
-        <div class="search-input-wrapper">
-          {{ ag_filter.form.as_p }}
-          <button type="submit" class="search-button">
-            <span class="button-text">Найти</span>
-            <span class="button-icon">→</span>
-          </button>
-        </div>
+        {{ ag_filter.form.as_p }}
+        <button type="submit" class="search-button">
+          <span class="button-text">Найти</span>
+          <span class="button-icon">→</span>
+        </button>
       </form>
     </div>
   </div>
@@ -132,7 +132,7 @@
       rgba(255, 255, 255, 0.2) 100%
     );
     backdrop-filter: blur(10px);
-    padding: 40px 20px;
+    padding: 40px;
     border-radius: 20px;
     margin: 30px auto;
     max-width: 800px;
@@ -164,82 +164,45 @@
     color: rgba(0, 0, 0, 0.9);
     font-size: 1.1rem;
     margin-bottom: 30px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   }
 
   .search-form {
-    width: 100%;
-    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
     margin: 0 auto;
   }
 
-  .search-input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
+  .search-form p {
+    margin: 0;
+  }
+
+  .search-form input[type="text"] {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
     background: white;
-    border-radius: 50px;
-    padding: 5px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
   }
 
-  .search-input-wrapper:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 20px;
-    font-style: normal;
-    font-size: 1.2rem;
-    color: #666;
-    pointer-events: none;
-  }
-
-  .search-input {
-    flex: 1;
-    padding: 18px 18px 18px 50px;
-    border: none;
-    background: transparent;
-    font-size: 1.1rem;
-    color: #333;
-    width: 100%;
-  }
-
-  .search-input::placeholder {
-    color: #999;
-    transition: color 0.3s ease;
-  }
-
-  .search-input:focus {
+  .search-form input[type="text"]:focus {
     outline: none;
-  }
-
-  .search-input:focus::placeholder {
-    color: #bbb;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
   }
 
   .search-button {
-    background: linear-gradient(135deg, #05c0a7 0%, #048f7d 100%);
+    background: #05c0a7;
     color: white;
     border: none;
-    padding: 15px 35px;
-    border-radius: 50px;
+    padding: 15px 30px;
+    border-radius: 10px;
     font-size: 1.1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: 10px;
-    box-shadow: 0 4px 15px rgba(5, 192, 167, 0.3);
-  }
-
-  .search-button:hover {
-    transform: translateX(3px);
-    box-shadow: 0 6px 20px rgba(5, 192, 167, 0.4);
   }
 
   .button-text {
@@ -373,6 +336,30 @@
     padding: 5px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
+  }
+
+  .agents-title {
+    color: #ffffff;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .agents-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 768px) {
+    .agents-title {
+      font-size: 2.5rem;
+    }
+
+    .agents-subtitle {
+      font-size: 1rem;
+    }
   }
 </style>
 {% endblock %}

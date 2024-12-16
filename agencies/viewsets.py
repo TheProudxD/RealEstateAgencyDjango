@@ -1,4 +1,3 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView
 from .models import Agent, Agreement
 from .serializers import AgentSerializer, AgentDetailSerializer
 from rest_framework.response import Response 
@@ -13,8 +12,6 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 class AgentViewSet(viewsets.ModelViewSet):
     pagination_class = AgentAPIPagination
     permission_classes = [UserPermission]
-    # queryset = Agent.objects.all()
-    # serializer_class = AgentSerializer
 
     @action(methods=['get'], detail=True)
     def agreement(self, request, pk=None):
@@ -35,14 +32,6 @@ class AgentViewSet(viewsets.ModelViewSet):
         if self.action == 'retrieve':
             return AgentDetailSerializer
         return AgentSerializer
-
-# class AgentAPIView(ListCreateAPIView):
-#     queryset = Agent.objects.all()
-#     serializer_class = AgentSerializer
-
-# class AgentAPIDetailView(RetrieveUpdateAPIView):
-#     queryset = Agent.objects.all()
-#     serializer_class = AgentSerializer
     
 class AgreementAPIView(APIView): 
     def get(self, request): 
